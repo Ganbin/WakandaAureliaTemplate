@@ -41,7 +41,7 @@ System.config({
     "font-awesome": "npm:font-awesome@4.6.1",
     "jquery": "npm:jquery@2.2.3",
     "text": "github:systemjs/plugin-text@0.0.3",,
-    "wakanda-client": "github:Wakanda/wakanda-javascript-client@^0.3.3"
+    "wakanda-client": "github:Wakanda/wakanda-javascript-client@^0.3.5"
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.4.1"
     },
