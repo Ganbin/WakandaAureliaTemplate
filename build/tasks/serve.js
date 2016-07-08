@@ -1,49 +1,56 @@
-var gulp = require('gulp'),
-	proxy = require('http-proxy-middleware'),
-	browserSync = require('browser-sync');
+var gulp = require('gulp');
+var browserSync = require('browser-sync');
 
 // this task utilizes the browsersync plugin
 // to create a dev server instance
-// at http://localhost:8000
+// at http://localhost:9000
 gulp.task('serve', ['build'], function(done) {
   browserSync({
-    online: true,
-    open: 'local',
-    browser: "google chrome",
-    port: 8000,
+    online: false,
+    open: false,
+    port: 9000,
     server: {
       baseDir: ['.'],
-      middleware: [
-      				proxy('!/src/**', {
-	                    target: 'http://127.0.0.1:8081',
-	                    changeOrigin: false,
-	                    ws: true
-               		})
-                ]
+      middleware: function(req, res, next) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        next();
+      }
     }
   }, done);
-
-
 });
 
 // this task utilizes the browsersync plugin
 // to create a dev server instance
-// at http://localhost:8000
+// at http://localhost:9000
 gulp.task('serve-bundle', ['bundle'], function(done) {
   browserSync({
-    online: true,
-    open: 'local',
-    browser: "google chrome",
-    port: 8000,
+    online: false,
+    open: false,
+    port: 9000,
     server: {
       baseDir: ['.'],
-      middleware: [
-      				proxy('!/src/**', {
-	                    target: 'http://127.0.0.1:8081',
-	                    changeOrigin: false,
-	                    ws: true
-               		})
-                ]
+      middleware: function(req, res, next) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        next();
+      }
+    }
+  }, done);
+});
+
+// this task utilizes the browsersync plugin
+// to create a dev server instance
+// at http://localhost:9000
+gulp.task('serve-export', ['export'], function(done) {
+  browserSync({
+    online: false,
+    open: false,
+    port: 9000,
+    server: {
+      baseDir: ['./export'],
+      middleware: function(req, res, next) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        next();
+      }
     }
   }, done);
 });

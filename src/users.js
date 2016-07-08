@@ -1,6 +1,9 @@
 import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
 import 'fetch';
+import {WakandaClient} from "wakanda-javascript-client";
+
+let wakanda = new WakandaClient('http://localhost:8081');
 
 @inject(HttpClient)
 export class Users {
@@ -13,6 +16,11 @@ export class Users {
         .useStandardConfiguration()
         .withBaseUrl('https://api.github.com/');
     });
+    
+    wakanda.getCatalog().then(function (ds) {
+		//ds (for dataStore) is our catalog, it contains all ours dataClasses. For example:
+		//ds.Company, ds.Employee, etc.
+	});
 
     this.http = http;
   }
